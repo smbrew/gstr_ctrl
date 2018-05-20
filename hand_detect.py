@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import cv2
 import numpy as np
-import copy
 
 def main():
     fgbg = cv2.createBackgroundSubtractorKNN()

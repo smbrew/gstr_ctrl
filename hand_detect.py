@@ -3,13 +3,15 @@ import cv2
 import numpy as np
 import copy
 
+
 def main():
+    cap = cv2.VideoCapture(1)
     fgbg = cv2.createBackgroundSubtractorKNN()
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
     kernel_l = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(9,9))
     kernel_s = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(5,5))
     b = 7
-    #fgbg = cv2.createBackgroundSubtractorGMG()
+    
     ret, bg = cap.read()
     gbg = cv2.cvtColor(bg, cv2.COLOR_BGR2GRAY)
     gbg_blur = cv2.GaussianBlur(gbg,(b,b),0)
@@ -22,10 +24,10 @@ def main():
             gbg_blur = cv2.GaussianBlur(gbg,(b,b),0)
             bg_blur = cv2.GaussianBlur(bg,(b,b),0)
         k = (k+1) % 60
-        # Capture frame-by-frame
+
         ret, frame = cap.read()
         im = frame.copy()
-        # Our operations on the frame come here
+        
         gim = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
         gim_blur = cv2.GaussianBlur(gim,(b,b),0)
         im_blur = cv2.GaussianBlur(im,(b,b),0)
